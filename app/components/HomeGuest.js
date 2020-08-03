@@ -2,6 +2,7 @@ import React, { useState, useContext } from "react"
 import Page from "./Page"
 import Axios from "axios"
 import DispatchContext from "../DispatchContext"
+import { baseUrl } from "./api"
 
 function HomeGuest() {
   const appDispatch = useContext(DispatchContext)
@@ -14,7 +15,7 @@ function HomeGuest() {
   async function handleSubmit(e) {
     e.preventDefault()
     try {
-      const res = await Axios.post("http://127.0.0.1:8000/register/", { username, first_name, last_name, email, password })
+      const res = await Axios.post(baseUrl + "/register/", { username, first_name, last_name, email, password })
 
       appDispatch({ type: "flashMessage", value: "You have successfully register" })
     } catch (e) {

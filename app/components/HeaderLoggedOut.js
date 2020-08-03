@@ -1,6 +1,7 @@
 import React, { useEffect, useState, useContext } from "react"
 import Axios from "axios"
 import DispatchContext from "../DispatchContext"
+import { baseUrl } from "./api"
 
 function HeaderLoggedOut(props) {
   const [username, setUsername] = useState()
@@ -10,7 +11,7 @@ function HeaderLoggedOut(props) {
   async function handleSubmit(e) {
     e.preventDefault()
     try {
-      const res = await Axios.post("http://127.0.0.1:8000/api-token-auth/", { username, password })
+      const res = await Axios.post(baseUrl + "/api-token-auth/", { username, password })
 
       if (res.data) {
         appDispatch({ type: "login", data: res.data })

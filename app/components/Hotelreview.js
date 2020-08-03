@@ -1,6 +1,7 @@
 import React, { useEffect, useState, useContext } from "react"
 import StateContext from "../StateContext"
 import Axios from "axios"
+import { baseUrl } from "./api"
 
 function HotelReview({ hotelId }) {
   const appState = useContext(StateContext)
@@ -9,7 +10,7 @@ function HotelReview({ hotelId }) {
 
   async function getReviews() {
     try {
-      const res = await Axios.get(`http://127.0.0.1:8000/hotel_api/get_hotel_reviews/${hotelId}`, { headers: { Authorization: token } })
+      const res = await Axios.get(`${baseUrl}/hotel_api/get_hotel_reviews/${hotelId}`, { headers: { Authorization: token } })
 
       setReviews(res.data)
     } catch (error) {

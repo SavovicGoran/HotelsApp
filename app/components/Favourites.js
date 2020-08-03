@@ -1,6 +1,7 @@
 import React, { useEffect, useState, useContext } from "react"
 import StateContext from "../StateContext"
 import Axios from "axios"
+import { baseUrl } from "./api"
 
 function Favourites() {
   const appState = useContext(StateContext)
@@ -8,7 +9,7 @@ function Favourites() {
   const token = "Token " + appState.user.token
 
   useEffect(() => {
-    Axios.get("http://127.0.0.1:8000/favorites/", { headers: { Authorization: token } }).then((res) => {
+    Axios.get(baseUrl + "/favorites/", { headers: { Authorization: token } }).then((res) => {
       setFavourites(res.data)
     })
   }, [])
@@ -16,9 +17,6 @@ function Favourites() {
     <div>
       <h1>This is a list of your favorite hotels</h1>
       <h3>The list is not available at the moment.</h3>
-      {/* {favourites.map((favourite, id) => {
-        return <div key={id} className="card"></div>
-      })} */}
     </div>
   )
 }

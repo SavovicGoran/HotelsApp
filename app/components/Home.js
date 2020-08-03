@@ -4,6 +4,7 @@ import StateContext from "../StateContext"
 import Axios from "axios"
 import HotelReview from "./Hotelreview"
 import { Link } from "react-router-dom"
+import { baseUrl } from "./api"
 
 function Home() {
   const appState = useContext(StateContext)
@@ -12,7 +13,7 @@ function Home() {
 
   async function getAllHotels() {
     try {
-      const res = await Axios.get("http://127.0.0.1:8000/hotel_api/", { headers: { Authorization: token } })
+      const res = await Axios.get(baseUrl + "/hotel_api/", { headers: { Authorization: token } })
 
       setAllhotels(res.data)
     } catch (error) {

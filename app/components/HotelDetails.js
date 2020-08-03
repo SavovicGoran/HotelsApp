@@ -3,6 +3,7 @@ import { useParams } from "react-router-dom"
 import { HeartIcon, HeartFillIcon } from "@primer/octicons-react"
 import StateContext from "../StateContext"
 import Axios from "axios"
+import { baseUrl } from "./api"
 
 function HotelDetails(props) {
   let { hotelId } = useParams()
@@ -11,13 +12,13 @@ function HotelDetails(props) {
   const token = "Token " + appState.user.token
 
   useEffect(() => {
-    Axios.get(`http://127.0.0.1:8000/hotel_api/${hotelId}`, { headers: { Authorization: token } }).then((res) => {
+    Axios.get(`${baseUrl}/hotel_api/${hotelId}`, { headers: { Authorization: token } }).then((res) => {
       setDetails(res.data)
     })
   }, [])
 
   async function addToFavourites() {
-    await Axios.post("http://127.0.0.1:8000/favorites/add_remove/", {
+    await Axios.post(baseUrl + "/favorites/add_remove/", {
       headers: { Authorization: token },
       body: { hotel_id: props.hotelId, is_favorite: false },
     })
